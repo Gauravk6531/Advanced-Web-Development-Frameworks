@@ -3,6 +3,28 @@ header {
   padding: 20px;
 }
 
+#root.theme-dark {
+  --text: #f3f4f6;
+  --text-h: #ffffff;
+  --bg: #111827;
+  --border: #374151;
+  color: var(--text);
+  background: var(--bg);
+}
+
+#root.theme-light {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #ffffff;
+  --border: #e5e4e7;
+  color: var(--text);
+  background: var(--bg);
+}
+
+#root {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
 .vertical-line {
   width: 2px;
   height: 100px;
