@@ -5,35 +5,38 @@ function Tasks() {
     const [tasks, setTasks] = useState([]);
     const [newTaskTitle, setNewTaskTitle] = useState("");
     const [newTaskAssignedUser, setNewTaskAssignedUser] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filter, setFilter] = useState("all"); // 'all', 'completed', 'pending'
 
-    const fetchTasks = async () => {
-        setLoading(true);
-        setError(null);
-
-        try {
-            const response = await fetch("/api/tasks");
-            if (!response.ok) {
-                throw new Error("Failed to load tasks");
-            }
-            const data = await response.json();
-            setTasks(data);
-        } catch (err) {
-            setError(err.message);
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: err.message
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
-        fetchTasks();
+        const controller = new AbortController();
+
+        fetch("/api/tasks", { signal: controller.signal })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load tasks");
+                }
+                return response.json();
+            })
+            .then((data) => setTasks(data))
+            .catch((err) => {
+                if (err.name === "AbortError") return;
+
+                setError(err.message);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: err.message
+                });
+            })
+            .finally(() => {
+                if (!controller.signal.aborted) {
+                    setLoading(false);
+                }
+            });
+
+        return () => controller.abort();
     }, []);
 
     const handleAddTask = async (event) => {

@@ -6,7 +6,6 @@ function Projects() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
         fetch("https://api.github.com/users/Gauravk6531/repos")
             .then((response) => {
                 if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
