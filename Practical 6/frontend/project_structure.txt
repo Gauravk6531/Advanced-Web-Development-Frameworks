@@ -1,0 +1,707 @@
+================================================================================
+PROJECT FILE AND FOLDER STRUCTURE
+================================================================================
+frontend/
+├── public
+│   ├── favicon.svg
+│   └── icons.svg
+├── src
+│   ├── assets
+│   │   ├── hero.png
+│   │   ├── react.svg
+│   │   └── vite.svg
+│   ├── components
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── ErrorMessage.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.css
+│   │   ├── Header.jsx
+│   │   ├── Home.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── NotFound.jsx
+│   │   ├── Projects.jsx
+│   │   ├── RepoCard.jsx
+│   │   ├── Skills.jsx
+│   │   └── Spinner.jsx
+│   ├── pages
+│   │   └── Projects.jsx
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── README.md
+└── vite.config.js
+
+
+================================================================================
+FILE CONTENTS
+================================================================================
+
+================================================================================
+FILE: public\favicon.svg
+================================================================================
+[Binary file or Image - Content not displayed]
+
+================================================================================
+FILE: public\icons.svg
+================================================================================
+[Binary file or Image - Content not displayed]
+
+================================================================================
+FILE: src\assets\hero.png
+================================================================================
+[Binary file or Image - Content not displayed]
+
+================================================================================
+FILE: src\assets\react.svg
+================================================================================
+[Binary file or Image - Content not displayed]
+
+================================================================================
+FILE: src\assets\vite.svg
+================================================================================
+[Binary file or Image - Content not displayed]
+
+================================================================================
+FILE: src\components\About.jsx
+================================================================================
+function About()
+{
+    return(
+        <section id="about">
+            <h2>About Me</h2>
+
+            <p>I am a B.Tech Computer Engineering student interested in
+        Artificial Intelligence, Machine Learning, and Web Development.</p>
+            <h3>Skills</h3>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Python</li>
+            </ul>
+
+        </section>
+    );
+}
+export default About;
+
+================================================================================
+FILE: src\components\Contact.jsx
+================================================================================
+import { useState } from "react";
+
+function Contact() {
+  const [message, setMessage] = useState("");
+  const [showHint, setShowHint] = useState(true);
+
+  return (
+    <section className="page-section">
+      <h2>Contact Me</h2>
+      <p>Send me a message and I will get back to you soon.</p>
+
+      <label htmlFor="message" style={{ display: "block", marginTop: "16px", fontWeight: "bold" }}>
+        Your message
+      </label>
+      <textarea
+        id="message"
+        rows="5"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Type your message here..."
+        style={{ width: "100%", maxWidth: "480px", marginTop: "8px", padding: "10px" }}
+      />
+
+      <p style={{ marginTop: "8px", color: "#666" }}>
+        Character count: {message.length}
+      </p>
+
+      <button
+        type="button"
+        onClick={() => setShowHint((prev) => !prev)}
+        style={{ marginTop: "12px", padding: "8px 12px" }}
+      >
+        {showHint ? "Hide tip" : "Show tip"}
+      </button>
+
+      {showHint && (
+        <p style={{ marginTop: "10px", color: "#007bff" }}>
+          Tip: Use a short and clear subject line for better responses.
+        </p>
+      )}
+    </section>
+  );
+}
+
+export default Contact;
+
+
+================================================================================
+FILE: src\components\ErrorMessage.jsx
+================================================================================
+
+
+================================================================================
+FILE: src\components\Footer.jsx
+================================================================================
+function Footer({ email }) {
+  return (
+    <footer
+      id="footer"
+      style={{
+        background: "#222",
+        color: "white",
+        padding: "15px",
+        textAlign: "center",
+      }}
+    >
+      <p>Email: {email}</p>
+
+      <p>© 2026 Student Portfolio</p>
+    </footer>
+  );
+}
+
+export default Footer;
+
+================================================================================
+FILE: src\components\Header.css
+================================================================================
+.vertical-line {
+    width: 2px;
+    height: 100px;
+    background-color: black;
+    align-items: center;
+}
+
+================================================================================
+FILE: src\components\Header.jsx
+================================================================================
+function Header({ name, themeColor }) {
+  return (
+    <header
+      style={{
+        backgroundColor: themeColor,
+        color: "white",
+        padding: "20px",
+        textAlign: "center",
+      }}
+    >
+      <h1>{name}</h1>
+      <p>AI & Machine Learning Student</p>
+    </header>
+  );
+}
+
+export default Header;
+
+================================================================================
+FILE: src\components\Home.jsx
+================================================================================
+import About from "./About";
+import Skills from "./Skills";
+
+function Home() {
+  const skills = ["React", "JavaScript", "Python", "Machine Learning", "SQL", "Git"];
+
+  return (
+    <section className="page-section">
+      <About college="CHARUSAT University" />
+      <Skills skillList={skills} />
+    </section>
+  );
+}
+
+export default Home;
+
+
+================================================================================
+FILE: src\components\Navbar.jsx
+================================================================================
+import { NavLink } from "react-router-dom";
+
+function Navbar() {
+  const links = [
+    { to: "/", label: "Home" },
+    { to: "/projects", label: "Projects" },
+    { to: "/contact", label: "Contact" },
+  ];
+
+  return (
+    <nav
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "20px",
+        background: "#333",
+        padding: "10px",
+      }}
+    >
+      {links.map((link) => (
+        <NavLink
+          key={link.to}
+          to={link.to}
+          style={({ isActive }) => ({
+            color: isActive ? "#ffd700" : "white",
+            textDecoration: "none",
+            fontWeight: "bold",
+          })}
+        >
+          {link.label}
+        </NavLink>
+      ))}
+    </nav>
+  );
+}
+
+export default Navbar;
+
+================================================================================
+FILE: src\components\NotFound.jsx
+================================================================================
+function NotFound() {
+  return (
+    <section className="page-section">
+      <h2>404 - Page Not Found</h2>
+      <p>The page you are looking for does not exist.</p>
+    </section>
+  );
+}
+
+export default NotFound;
+
+
+================================================================================
+FILE: src\components\Projects.jsx
+================================================================================
+function Projects()
+{
+    return (
+        <section>
+            <h2>Projects</h2>
+
+            <ul>
+                <li>Animal Image Classification using CNN</li>
+                <li>Credit Card Fraud Detection</li>
+                <li>Flight Price Prediction</li>
+            </ul>
+        </section>
+    )
+}
+export default Projects;
+
+================================================================================
+FILE: src\components\RepoCard.jsx
+================================================================================
+
+
+================================================================================
+FILE: src\components\Skills.jsx
+================================================================================
+function Skills({ skillList }) {
+  return (
+    <section id="skills">
+      <h2>Skills</h2>
+
+      <ul>
+        {skillList.map((skill) => (
+          <li key={skill}>{skill}</li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export default Skills;
+
+================================================================================
+FILE: src\components\Spinner.jsx
+================================================================================
+
+
+================================================================================
+FILE: src\pages\Projects.jsx
+================================================================================
+import { useState, useEffect } from "react";
+
+function Projects() {
+    const [repos, setRepos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        setLoading(true);
+        fetch("https://api.github.com/users/Gauravk6531/repos")
+            .then((response) => {
+                if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+                return response.json();
+            })
+            .then((data) => setRepos(data))
+            .catch((err) => setError(err.message))
+            .finally(() => setLoading(false));
+    }, []);
+
+    if (loading) return <div>Loading repos...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+    return (
+        <section>
+            <h2>Projects</h2>
+            <ul>
+                {repos.map((repo) => (
+                    <li key={repo.id}>
+                        <a href={repo.html_url} target="_blank" rel="noreferrer">
+                            {repo.name}
+                        </a>
+                        {repo.description && <p>{repo.description}</p>}
+                    </li>
+                ))}
+            </ul>
+        </section>
+    );
+}
+
+export default Projects;
+
+================================================================================
+FILE: src\App.css
+================================================================================
+header {
+  text-align: left;
+  padding: 20px;
+}
+
+.vertical-line {
+  width: 2px;
+  height: 100px;
+  background-color: black;
+}
+
+.page-section {
+  text-align: left;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 0 24px;
+}
+
+.page-section ul {
+  padding-left: 20px;
+}
+
+
+================================================================================
+FILE: src\App.jsx
+================================================================================
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import Projects from "./pages/Projects";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <>
+      <Header name="Kolhe Gaurav" themeColor="teal" />
+      <Navbar />
+
+      <main style={{ padding: "20px" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      <Footer email="gauravkolhe019@google.com" />
+    </>
+  );
+}
+
+export default App;
+
+================================================================================
+FILE: src\index.css
+================================================================================
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+
+================================================================================
+FILE: src\main.jsx
+================================================================================
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>,
+)
+
+
+================================================================================
+FILE: .gitignore
+================================================================================
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+================================================================================
+FILE: eslint.config.js
+================================================================================
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+  },
+])
+
+
+================================================================================
+FILE: index.html
+================================================================================
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>student-portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+
+================================================================================
+FILE: package.json
+================================================================================
+{
+  "name": "student-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^10.6.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "vite": "^8.1.1"
+  }
+}
+
+
+================================================================================
+FILE: README.md
+================================================================================
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+================================================================================
+FILE: vite.config.js
+================================================================================
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})

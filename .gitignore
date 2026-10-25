@@ -1,0 +1,8 @@
+
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+**/serviceAccountKey*.json
+
+Practical 6/backend/serviceAccountKey.json

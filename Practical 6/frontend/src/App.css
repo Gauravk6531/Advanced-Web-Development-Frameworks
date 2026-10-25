@@ -1,0 +1,21 @@
+header {
+  text-align: left;
+  padding: 20px;
+}
+
+.vertical-line {
+  width: 2px;
+  height: 100px;
+  background-color: black;
+}
+
+.page-section {
+  text-align: left;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 0 24px;
+}
+
+.page-section ul {
+  padding-left: 20px;
+}
